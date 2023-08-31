@@ -5,6 +5,7 @@ import { Flex } from '../../../styles/Global'
 import { addLeadingZero, formatTime } from '../../../utils/helpers'
 
 import Counter from './Counter'
+import EmailInput from '../../QuizDetailsScreen/EmailInput'
 
 const ActiveQuestionNo = styled.span`
   font-size: clamp(40px, 5vw, 60px);

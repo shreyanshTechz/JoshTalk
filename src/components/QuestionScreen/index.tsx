@@ -13,6 +13,7 @@ import ModalWrapper from '../ui/ModalWrapper'
 import Question from './Question'
 import QuizHeader from './QuizHeader'
 import './Sidebar.css';
+import { theme } from '../../styles/Theme'
 const QuizContainer = styled.div<{ selectedAnswer: boolean }>`
   width: 900px;
   min-height: 500px;
@@ -139,7 +140,6 @@ const QuestionScreen: FC = () => {
 
   const handleAnswerSelection = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { name, checked } = e.target
-    
     if (type === 'multiple' || type === 'boolean') {
       if (checked) {
         setSelectedAnswer([name])
@@ -189,9 +189,12 @@ const QuestionScreen: FC = () => {
       <LogoContainer>
         <AppLogo />
       </LogoContainer>
+      <p style={{ fontSize: '20px', color: theme.colors.themeColor, textDecoration: 'none', marginTop: '10px' }}>
+        <p style={{ fontSize: '20px', color:'#f3772c', marginTop: '10px' }} >Welcome </p> {localStorage.getItem("email")}
+      </p>
       <Sidebar numbers={[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]}/>
-      <QuizContainer selectedAnswer={selectedAnswer.length > 0}>
       
+      <QuizContainer selectedAnswer={selectedAnswer.length > 0}>
         <QuizHeader
           activeQuestion={activeQuestion}
           totalQuestions={quizDetails.totalQuestions}

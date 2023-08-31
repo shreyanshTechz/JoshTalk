@@ -6,8 +6,9 @@ import { CenterCardContainer, HighlightedText, PageCenter } from '../../styles/G
 import { ScreenTypes } from '../../types'
 import { convertSeconds } from '../../utils/helpers'
 import { useShuffleQuestions } from '../../hooks'
-
+import EmailInput from './EmailInput'
 import Button from '../ui/Button'
+import { useState } from 'react'
 
 const AppTitle = styled.h2`
   font-weight: 700;
@@ -32,13 +33,29 @@ const DetailText = styled.p`
   line-height: 1.3;
 `
 
+
+const isEmailValid = (email: string): boolean => {
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+com/;
+  return emailPattern.test(email);
+};
+
+
 const QuizDetailsScreen = () => {
   const { setCurrentScreen, quizDetails } = useQuiz()
+  const [email, setEmail] = useState('');
+  const [isValid, setIsValid] = useState(false);
+  const handleEmailChange = (newEmail: string) => {
+    setEmail(newEmail);
+    setIsValid(isEmailValid(newEmail));
+    console.log(isValid);
+    
+  };
 
   const { selectedQuizTopic, totalQuestions, totalScore, totalTime } = quizDetails
 
   const goToQuestionScreen = () => {
     setCurrentScreen(ScreenTypes.QuestionScreen)
+    localStorage.setItem("email",email);
   }
 
   // to shuffle or randomize quiz questions
@@ -50,7 +67,11 @@ const QuizDetailsScreen = () => {
         <Logo />
         <AppTitle>GENERAL KNOWLEDGE QUIZ</AppTitle>
         <DetailTextContainer>
-          
+        <EmailInput
+        label="Email: "
+        value={email}
+        onChange={handleEmailChange}
+      />
           <DetailText>
             Total questions to attempt:{' '}
             <HighlightedText>{totalQuestions}</HighlightedText>
@@ -67,6 +88,7 @@ const QuizDetailsScreen = () => {
           icon={<StartIcon />}
           iconPosition="left"
           onClick={goToQuestionScreen}
+          disabled={!isValid}
         />
       </CenterCardContainer>
     </PageCenter>

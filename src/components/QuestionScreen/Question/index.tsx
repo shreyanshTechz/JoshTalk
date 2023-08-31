@@ -50,6 +50,7 @@ const Question: FC<QuestionTypes> = ({
   currques
 }) => {
   // console.log(completed[currques]);
+  question = question.replace("&quot;","'");
   return (
     <QuestionContainer>
       <QuestionStyle>{question}</QuestionStyle>
@@ -59,8 +60,7 @@ const Question: FC<QuestionTypes> = ({
             choice={choice}
             index={index}
             key={index}
-            onChange={(e) => {handleAnswerSelection(e, index);
-            }}
+            onChange={(e) => {handleAnswerSelection(e, index);}}
             type={type}
             selectedAnswer={selectedAnswer}
             selected = {completed[currques]?completed[currques]:{selectedAnswer:["5"]}}
