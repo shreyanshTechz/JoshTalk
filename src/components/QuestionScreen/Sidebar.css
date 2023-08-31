@@ -1,0 +1,38 @@
+.CenterBox {
+    width: 60%; /* Adjust width as needed */
+    /* background-color: #f0f0f0; */
+    font-size: 14px;
+    display: grid;
+    margin: 20px;
+    pointer-events:visiblePainted;
+    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+    gap: var(--gap-size, 25px); /* Default gap size and can be overridden */
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .sidebar{
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    margin: 2vh;
+    justify-content: center;
+  }
+  .number-box {
+    width: 30px;
+    height: 30px;
+    background-color: #3498db;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Media query for adjusting gap on smaller screens */
+  @media (max-width: 768px) {
+    .sidebar {
+      --gap-size: 3px; /* Adjust the gap size for smaller screens */
+      padding: 5px; /* Adjust padding as needed */
+    }
+  }
+  
