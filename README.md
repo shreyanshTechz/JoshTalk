@@ -1,4 +1,3 @@
-Certainly, if your JoshTalks Quiz App is a simpler project with fewer features, you can create a more streamlined README. Here's a simplified README for your TypeScript project:
 
 # JoshTalks Quiz App
 
