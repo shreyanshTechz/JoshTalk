@@ -52,7 +52,21 @@ const Answer: FC<AnswerProps> = ({ onChange, index, choice, type, selectedAnswer
   // Convert index to alphabet character to show ABCD before question
   const label = String.fromCharCode(65 + index)
   // console.log(selected);
-  
+  const converted = new Map([
+    ["&#39;", "'"],
+    ["&#039;", "'"],
+    ["&#34;", '"'],
+    ["&#034;", "'"],
+    ["&quot;", '"'],
+    ["&apos;", "'"],
+  ]);
+  function convert(s:string) {
+    converted.forEach((val,key)=>{
+      s = s.replaceAll(key,val);
+    })
+    return s;    
+  }
+  choice = convert(choice);
   return (
     <AnswerStyle id='answers' key={index} highlightAnswer={selectedAnswer.includes(choice) || selected.selectedAnswer.includes(choice) }>
       <AnswerLabel>

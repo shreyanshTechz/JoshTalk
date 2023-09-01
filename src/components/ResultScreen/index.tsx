@@ -128,7 +128,20 @@ const ResultScreen: FC = () => {
   const onClickRetry = () => {
     refreshPage()
   }
-
+  const converted = new Map([
+    ["&#39;", "'"],
+    ["&#039;", "'"],
+    ["&#34;", '"'],
+    ["&#034;", "'"],
+    ["&quot;", '"'],
+    ["&apos;", "'"],
+  ]);
+  function convert(s:string) {
+    converted.forEach((val,key)=>{
+      s = s.replaceAll(key,val);
+    })
+    return s;    
+  }
   return (
     <ResultScreenContainer>
       <LogoContainer>
@@ -141,6 +154,7 @@ const ResultScreen: FC = () => {
             { question, choices, correctAnswers, selectedAnswer, score, isMatch },
             index: number
           ) => {
+            question = convert(question);
             return (
               <QuestionContainer key={question}>
                 <ResizableBox width="90%">

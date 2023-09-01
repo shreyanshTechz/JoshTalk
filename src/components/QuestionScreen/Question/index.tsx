@@ -5,7 +5,6 @@ import { device } from '../../../styles/BreakPoints'
 
 import Answer from '../Answer'
 import { Result } from '../../../types'
-
 const QuestionContainer = styled.div`
   margin-top: 30px;
   margin-bottom: 40px;
@@ -49,8 +48,21 @@ const Question: FC<QuestionTypes> = ({
   completed,
   currques
 }) => {
-  // console.log(completed[currques]);
-  question = question.replace("&quot;","'");
+  const converted = new Map([
+    ["&#39;", "'"],
+    ["&#039;", "'"],
+    ["&#34;", '"'],
+    ["&#034;", "'"],
+    ["&quot;", '"'],
+    ["&apos;", "'"],
+  ]);
+  function convert(s:string) {
+    converted.forEach((val,key)=>{
+      s = s.replaceAll(key,val);
+    })
+    return s;    
+  }
+  question = convert(question);
   return (
     <QuestionContainer>
       <QuestionStyle>{question}</QuestionStyle>
